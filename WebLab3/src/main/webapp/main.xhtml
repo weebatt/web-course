@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <link href="resources/css/mainStyle.css" rel="stylesheet" type="text/css" />
+    <script src="resources/js/generateColors.js"> </script>
+    <script src="resources/js/mainGradient.js"> </script>
+    <title>WebLab3</title>
+</h:head>
+
+<h:body>
+    <svg id="coordinatePlane" width="400" height="400"> </svg>
+    <script src="resources/js/coordinatePlane.js"> </script>
+
+        <img src="resources/images/Miku2.gif" width="400" height="400" id="miku2" />
+
+    <div class="content">
+        <a href="index.xhtml" id="next-btn">Перейти на стартовую страницу</a>
+    </div>
+
+    <h:form id="form">
+        <p:remoteCommand name="sendCoordinates"
+                         process="@form"
+                         action="#{hitCheckBean.process}"
+                         oncomplete="makeData(xhr, status, args)" />
+
+        <p:commandButton value="Send Data"
+                         action="#{hitCheckBean.process}"
+                         process="@form"
+                         update="@form"
+                         style="transform: translate(215px, 300px);"/>
+
+
+        <p:spinner id="xSpinner"
+                   value="#{hitCheckBean.x}"
+                   min="-5"
+                   max="5"
+                   placeholder="Введите X из (-5, 5)">
+        </p:spinner>
+
+        <p:inputText id="yInput"
+                     value="#{hitCheckBean.y}"
+                     placeholder="Введите Y из (-3, 5)"
+                     required="true"
+                     requiredMessage="Поле Y обязательно">
+            <f:validateDoubleRange minimum="-3" maximum="5" />
+        </p:inputText>
+
+        <p:selectOneRadio id="rNumberSelector"
+                          value="#{hitCheckBean.r}"
+                          required="true"
+                          requiredMessage="Выберите радиус">
+            <f:selectItem itemValue="1" itemLabel="1" />
+            <f:selectItem itemValue="2" itemLabel="2" />
+            <f:selectItem itemValue="3" itemLabel="3" />
+            <f:selectItem itemValue="4" itemLabel="4" />
+            <f:selectItem itemValue="5" itemLabel="5" />
+            <p:ajax event="change"
+                    oncomplete="redrawCoordinatePlane()" />
+        </p:selectOneRadio>
+
+        <p:dataTable id="resultsTable" value="#{hitCheckBean.results}" var="result" style="width: 100%; transform: translate(-325px, 400px);">
+            <p:column headerText="X">
+                <h:outputText value="#{result.x}" />
+            </p:column>
+            <p:column headerText="Y">
+                <h:outputText value="#{result.y}" />
+            </p:column>
+            <p:column headerText="R">
+                <h:outputText value="#{result.r}" />
+            </p:column>
+            <p:column headerText="Hit Status">
+                <h:outputText value="#{result.result ? 'Hit' : 'Miss'}" />
+            </p:column>
+        </p:dataTable>
+        <p:poll interval="1" update="resultsTable" />
+    </h:form>
+
+    <script src="resources/js/validate.js"> </script>
+</h:body>
+</html>

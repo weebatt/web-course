@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="mystyle.css" rel="stylesheet" type="text/css"/>
+    <meta charset="UTF-8">
+    <title>WebLab1</title>
+</head>
+<body>
+<div id="header">
+    <h1>Лабораторная работа №1</h1>
+    <a>Александров Александр Александрович</a>
+    <p>Группа: P3206 Вариант: 115203</p>
+</div>
+
+<form id="bottom">
+    <svg id="coordinatePlane" width="400" height="400"></svg>
+    <div id="buttons-container">
+        <div class="x-buttons-container">
+            <label class="x-label">Изменить X:</label>
+            <button type="button" class="x-button" value="-5">-5</button>
+            <button type="button" class="x-button" value="-4">-4</button>
+            <button type="button" class="x-button" value="-3">-3</button>
+            <button type="button" class="x-button" value="-2">-2</button>
+            <button type="button" class="x-button" value="-1">-1</button>
+            <button type="button" class="x-button" value="0" >0</button>
+            <button type="button" class="x-button" value="1" >1</button>
+            <button type="button" class="x-button" value="2" >2</button>
+            <button type="button" class="x-button" value="3" >3</button>
+        </div>
+        <div class="y-input-container">
+            <label class="y-label">Изменить Y:</label>
+            <input type="text" class="y-input" name="y-coordinate" placeholder="Введите Y из (-5, 3)" >
+        </div>
+        <div class="radius-radio-container">
+            <label class="radius-label">Изменить R:</label>
+            <input type="radio" class="radius-radio" name="radius" value="1" >
+            <label class="radius1">1</label>
+            <input type="radio" class="radius-radio" name="radius" value="2" >
+            <label class="radius2">2</label>
+            <input type="radio" class="radius-radio" name="radius" value="3" >
+            <label class="radius3">3</label>
+            <input type="radio" class="radius-radio" name="radius" value="4" >
+            <label class="radius4">4</label>
+            <input type="radio" class="radius-radio" name="radius" value="5" >
+            <label class="radius5">5</label>
+        </div>
+        <div>
+            <audio src="neProbil.mp3" id="neProbil"></audio>
+            <audio src="probitie1.mp3" id="probil"></audio>
+        </div>
+        <input type="submit" value="Submit" id="submit-button">
+    </div>
+    <div>
+        <table id="output-table">
+            <tr>
+                <th>Номер запроса</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>R</th>
+                <th>Попадание</th>
+                <th>Время</th>
+            </tr>
+            <tr id="Number"></tr>
+            <tr id="XHistory"></tr>
+            <tr id="YHistory"></tr>
+            <tr id="RHistory"></tr>
+            <tr id="hit"></tr>
+            <tr id="time"></tr>
+            <tr id="run"></tr>
+        </table>
+    </div>
+    <script src="validate.js"></script>
+    <script src="coord.js"></script>
+</form>
+</body>
+</html>

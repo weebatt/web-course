@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#coordinatePlane {
+    transform: translate(4%, 7%);
+}
+
+.content {
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translate(430px, -115px);
+    font-size: 24px;
+}
+
+#next-btn {
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+#miku2 {
+    transform: translate(340px, 35px);
+}
+
+#form{
+    transform: translate(320px, -380px);
+}
+
+.ui-spinner .ui-spinner-up,
+.ui-spinner .ui-spinner-down {
+    transform: translate(50px, 50px);
+    color: white;
+}
+
+.ui-spinner input {
+    transform: translate(50px, 50px);
+}
+
+.ui-spinner input:focus {
+    transform: translate(50px, 50px);
+}
+
+.ui-inputfield {
+    border-color: black;
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    transform: translate(-165px, 104px);
+}
+
+.ui-selectoneradio {
+    display: block;
+    flex-direction: column;
+    width: 300px;
+    margin: 10px 0;
+    transform: translate(130px, 110px);
+}

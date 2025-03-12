@@ -1,0 +1,77 @@
+plugins {
+	id 'java'
+	id 'war'
+	id 'org.springframework.boot' version '3.3.5'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.example.weebat'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// JWT
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	// Основные стартеры Spring Boot
+	implementation 'org.springframework.security:spring-security-oauth2-client'
+
+	implementation('org.springframework.boot:spring-boot-starter-web') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+	implementation('org.springframework.boot:spring-boot-starter-security') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+	implementation('org.springframework.boot:spring-boot-starter-oauth2-authorization-server') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+
+	// Логирование: исключаем Logback и используем Log4j2
+	implementation('org.springframework.boot:spring-boot-starter') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// База данных
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+
+	// Tomcat для WAR
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+
+	// Тестирование
+	testImplementation('org.springframework.boot:spring-boot-starter-test'){
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

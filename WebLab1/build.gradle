@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation files('/Users/macbook/WEB/WebLab1/lib/FastCGI.jar')
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.example.Server',
+                'Class-Path': 'lib/FastCGI.jar'
+        )
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    from {
+        zipTree(file('/Users/macbook/WEB/WebLab1/lib/FastCGI.jar'))
+    }
+}
